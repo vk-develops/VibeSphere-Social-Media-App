@@ -27,7 +27,7 @@ const OnboardComponent = ({
     };
 
     return (
-        <View className="flex-1">
+        <View className="flex-1 bg-bgColor-light">
             <Animated.View
                 entering={FadeInUp.duration(800).springify()}
                 className="flex-[0.5] bg-purple--50 items-center justify-end rounded-b-[40px]"
@@ -71,7 +71,7 @@ const OnboardComponent = ({
                                     goToNextSlide();
                                 }
                             }}
-                            className="bg-purple--800 flex items-center justify-center rounded-full mt-10"
+                            className="bg-purple--500 flex items-center justify-center rounded-full mt-10"
                         >
                             <View className="flex items-center justify-center gap-3 flex-row py-[14px]">
                                 <Text
