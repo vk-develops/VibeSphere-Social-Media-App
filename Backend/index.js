@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import connectDB from "./Config/db.js";
+import authRoute from "./Routes/authRoute.js";
 
 //App init
 dotenv.config();
@@ -19,6 +20,9 @@ app.use(cookieParser());
 app.get("/api/v1/", (req, res) => {
     res.status(200).json({ success: true, message: "HTTP Method Success!" });
 });
+
+//API's
+app.use("/api/v1/users/auth", authRoute);
 
 //App listen
 app.listen(PORT, () => {
