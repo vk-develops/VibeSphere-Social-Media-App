@@ -1,7 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
-
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import OnboardingStack from "./src/Screens/Onboarding/OnboardingStack";
 
 export default function App() {
     const [fontsLoaded] = useFonts({
@@ -16,9 +17,11 @@ export default function App() {
     }
 
     return (
-        <View className="flex-1 items-center justify-center bg-bgColor-light">
-            <Text>Open up App.js to start working on your app!</Text>
+        <View className="flex-1">
             <StatusBar style="auto" />
+            <NavigationContainer>
+                <OnboardingStack />
+            </NavigationContainer>
         </View>
     );
 }
