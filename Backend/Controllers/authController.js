@@ -244,4 +244,31 @@ const isLoggedin = asyncHandler(async (req, res) => {
     }
 });
 
-export { registerUser, loginUser, logoutUser, isLoggedin };
+// Google OAuth callback handler
+const googleAuthCallback = asyncHandler((req, res, next) => {
+    passport.authenticate("google", (err, user, info) => {
+        if (err) {
+            return res
+                .status(500)
+                .json({ success: false, message: "Internal Server Error" });
+        }
+        if (!user) {
+            return res
+                .status(401)
+                .json({ success: false, message: "Authentication failed" });
+        }
+        req.logIn(user, (err) => {
+            if (err) {
+                return res
+                    .status(500)
+                    .json({ success: false, message: "Internal Server Error" });
+            }
+            generateToken(res, user._id);
+            return res
+                .status(200)
+                .json({ success: true, message: "Authentication successful" });
+        });
+    })(req, res, next);
+});
+
+export { registerUser, loginUser, logoutUser, isLoggedin, googleAuthCallback };
