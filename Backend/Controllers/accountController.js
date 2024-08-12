@@ -6,7 +6,7 @@ import {
     Mailgenerator,
     generateOTP,
     mailTransport,
-} from "../Utils/accountVerifiactionUtil.js";
+} from "../Utils/accountVerificationUtil.js";
 
 // @desc    Verify account by entering the OTP recieved
 // @route   POST /api/v1/users/account/verify

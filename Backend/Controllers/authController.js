@@ -7,7 +7,7 @@ import {
     Mailgenerator,
     generateOTP,
     mailTransport,
-} from "../Utils/accountVerifiactionUtil.js";
+} from "../Utils/accountVerificationUtil.js";
 import AccountVerification from "../Models/accountVerificationModel.js";
 
 // @desc    Register users & and get a token
