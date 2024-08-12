@@ -3,6 +3,8 @@ import { useFonts } from "expo-font";
 import { View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import OnboardingStack from "./src/Screens/Onboarding/OnboardingStack";
+import { Provider } from "react-redux";
+import store from "./src/Redux/store";
 
 export default function App() {
     const [fontsLoaded] = useFonts({
@@ -18,10 +20,12 @@ export default function App() {
 
     return (
         <View className="flex-1">
-            <StatusBar style="auto" />
-            <NavigationContainer>
-                <OnboardingStack />
-            </NavigationContainer>
+            <Provider store={store}>
+                <StatusBar style="auto" />
+                <NavigationContainer>
+                    <OnboardingStack />
+                </NavigationContainer>
+            </Provider>
         </View>
     );
 }
