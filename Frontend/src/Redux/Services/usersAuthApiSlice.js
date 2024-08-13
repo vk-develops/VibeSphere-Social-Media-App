@@ -45,6 +45,24 @@ export const usersAuthApiSlice = apiSlice.injectEndpoints({
                 credentials: "include",
             }),
         }),
+        // Google login initiation (optional, usually handled by redirect)
+        googleLoginRedirect: builder.query({
+            query: () => ({
+                url: `${AUTH_URL}/auth/google`,
+                method: "GET",
+                credentials: "include",
+            }),
+        }),
+
+        // Handle the Google OAuth callback if necessary
+        googleLoginCallback: builder.mutation({
+            query: (code) => ({
+                url: `${AUTH_URL}/auth/google/callback`,
+                method: "GET",
+                credentials: "include",
+                params: { code }, // Pass the authorization code received from Google
+            }),
+        }),
     }),
     overrideExisting: true,
 });
@@ -54,4 +72,6 @@ export const {
     useLoginMutation,
     useLogoutMutation,
     useIsLoggedInQuery,
+    useGoogleLoginRedirectQuery,
+    useGoogleLoginCallbackMutation,
 } = usersAuthApiSlice;
