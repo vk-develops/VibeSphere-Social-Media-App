@@ -14,11 +14,13 @@ const GoogleLoginButton = () => {
             native: "VibeSphere://redirect",
         });
 
-        const result = await AuthSession.startAsync({
-            authUrl: `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${encodeURIComponent(
-                redirectUri
-            )}&response_type=code&scope=profile email`,
-        });
+        console.log(AuthSession);
+
+        const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${encodeURIComponent(
+            redirectUri
+        )}&response_type=code&scope=profile email`;
+
+        const result = await AuthSession.startAsync({ authUrl });
 
         if (result.type === "success" && result.params.code) {
             try {
