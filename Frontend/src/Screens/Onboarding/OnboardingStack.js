@@ -4,6 +4,7 @@ import {
 } from "@react-navigation/stack";
 import React from "react";
 import OnboardingScreen from "./OnboardingScreen";
+import AuthStack from "../Authentication/AuthStack";
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,10 @@ const OnboardingStack = () => {
             <Stack.Screen
                 name="OnboardingScreen"
                 component={OnboardingScreen}
+            />
+            <Stack.Screen
+                name="AuthStack"
+                component={AuthStack}
             />
         </Stack.Navigator>
     );

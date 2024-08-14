@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BASE_URL, AUTH_URL } from "../Redux/constants";
 import HomeStack from "../Screens/Home/HomeStack";
 import OnboardingStack from "../Screens/Onboarding/OnboardingStack";

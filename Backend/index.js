@@ -1,6 +1,8 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 import passport from "passport";
 import cookieParser from "cookie-parser";
 import connectDB from "./Config/db.js";
@@ -9,7 +11,6 @@ import accountRoute from "./Routes/accountRoute.js";
 import "./Config/passportConfig.js";
 
 //App init
-dotenv.config();
 connectDB();
 const app = express();
 const PORT = process.env.PORT || 8080;

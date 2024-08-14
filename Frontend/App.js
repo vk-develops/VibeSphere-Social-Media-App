@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import OnboardingStack from "./src/Screens/Onboarding/OnboardingStack";
 import { Provider } from "react-redux";
 import store from "./src/Redux/store";
+import MainNavigator from "./src/Navigation/MainNavigator";
 
 export default function App() {
     const [fontsLoaded] = useFonts({
@@ -23,7 +24,7 @@ export default function App() {
             <Provider store={store}>
                 <StatusBar style="auto" />
                 <NavigationContainer>
-                    <OnboardingStack />
+                    <MainNavigator />
                 </NavigationContainer>
             </Provider>
         </View>
