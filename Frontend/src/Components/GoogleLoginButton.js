@@ -22,6 +22,7 @@ const GoogleLoginButton = () => {
             scopes: ["profile", "email"],
             redirectUri: makeRedirectUri({
                 native: "VibeSphere://redirect",
+                useProxy: true,
             }),
         },
         discovery
@@ -58,7 +59,12 @@ const GoogleLoginButton = () => {
         handleAuthRequest();
     }, [response]);
 
-    return <Button title="Login with Google" />;
+    return (
+        <Button
+            title="Login with Google"
+            onPress={() => promptAsync()}
+        />
+    );
 };
 
 export default GoogleLoginButton;
