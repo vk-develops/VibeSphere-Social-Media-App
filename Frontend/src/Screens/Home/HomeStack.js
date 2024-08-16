@@ -8,6 +8,7 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import Logo from "../../../assets/images/VibeSphere.png";
 import Bookmark from "../../../assets/icons/bookmar-save.png";
 import Bars from "../../../assets/icons/menu-burger.png";
+import PostDetail from "./PostDetail";
 
 const Stack = createStackNavigator();
 
@@ -70,6 +71,10 @@ const HomeStack = () => {
                     },
                     headerTitle: "",
                 }}
+            />
+            <Stack.Screen
+                name="PostDetail"
+                component={PostDetail}
             />
         </Stack.Navigator>
     );

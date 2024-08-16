@@ -93,7 +93,7 @@ const PostCard = () => {
                     />
                 </View>
             </TouchableOpacity>
-            <View className="flex-row items-center justify-between">
+            <View className="flex-row items-center justify-between mt-1">
                 <View className="flex-row items-center justify-start my-3">
                     <View className="flex-row items-center justify-start">
                         <Image
@@ -140,7 +140,7 @@ const PostCard = () => {
                 </TouchableOpacity>
             </View>
 
-            <View className="w-full h-[0.5px] bg-[#c8c8c8] mt-6 mb-4"></View>
+            <View className="w-full h-[0.5px] bg-[#c8c8c8] mt-2 mb-4"></View>
         </View>
     );
 };
