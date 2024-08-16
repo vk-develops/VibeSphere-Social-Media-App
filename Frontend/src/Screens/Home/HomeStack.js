@@ -14,7 +14,13 @@ const Stack = createStackNavigator();
 
 const HomeStack = () => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator
+            screenOptions={{
+                gestureEnabled: true,
+                gestureDirection: "horizontal",
+                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+        >
             <Stack.Screen
                 name="HomeScreen"
                 component={HomeScreen}
@@ -75,6 +81,7 @@ const HomeStack = () => {
             <Stack.Screen
                 name="PostDetail"
                 component={PostDetail}
+                options={{ headerShown: false }}
             />
         </Stack.Navigator>
     );

@@ -3,7 +3,7 @@ import React from "react";
 import { StatusBar } from "expo-status-bar";
 import PostCard from "../../Components/PostCard";
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
     return (
         <ScrollView className="bg-bgColor-light">
             <StatusBar
@@ -11,9 +11,9 @@ const HomeScreen = () => {
                 style="dark"
             />
             <View className="px-4">
-                <PostCard />
-                <PostCard />
-                <PostCard />
+                <PostCard navigation={navigation} />
+                <PostCard navigation={navigation} />
+                <PostCard navigation={navigation} />
             </View>
         </ScrollView>
     );

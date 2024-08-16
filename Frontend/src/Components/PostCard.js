@@ -7,7 +7,7 @@ import Bookmark from "../../assets/icons/bookmar-save.png";
 
 const width = Dimensions.get("window").width;
 
-const PostCard = () => {
+const PostCard = ({ navigation }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const text =
@@ -76,7 +76,14 @@ const PostCard = () => {
                     </TouchableOpacity>
                 </Text>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity
+                onPress={() =>
+                    navigation.navigate("PostDetail", {
+                        image: "https://cdn.pixabay.com/photo/2024/04/25/19/49/ai-generated-8720625_640.png",
+                        text,
+                    })
+                }
+            >
                 <View
                     className="rounded-3xl overflow-hidden mt-3"
                     style={{ height: width - 16 }}
