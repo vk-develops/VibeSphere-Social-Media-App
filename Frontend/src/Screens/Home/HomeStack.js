@@ -6,7 +6,8 @@ import {
 import HomeScreen from "./HomeScreen";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import Logo from "../../../assets/images/VibeSphere.png";
-import { Ionicons } from "@expo/vector-icons";
+import Bookmark from "../../../assets/icons/bookmar-save.png";
+import Bars from "../../../assets/icons/menu-burger.png";
 
 const Stack = createStackNavigator();
 
@@ -26,26 +27,46 @@ const HomeStack = () => {
                             />
                             <Text
                                 className="text-xl text-headerColor-light pl-2"
-                                style={{ fontWeight: "bold" }}
+                                style={{ fontFamily: "jakartaBold" }}
                             >
                                 VibeSphere
                             </Text>
                         </View>
                     ),
                     headerRight: () => (
-                        <TouchableOpacity
-                            onPress={() => alert("Liked!")}
-                            style={{ marginRight: 15 }}
-                        >
-                            <Ionicons
-                                name="heart-outline"
-                                size={24}
-                                color="black"
-                            />
-                        </TouchableOpacity>
+                        <View className="flex-row items-center justify-end">
+                            <TouchableOpacity
+                                onPress={() =>
+                                    alert(
+                                        "Feature under development! Thanks for understanding (only if u understand)"
+                                    )
+                                }
+                                style={{ marginRight: 10 }}
+                            >
+                                <Image
+                                    className="h-6 w-6"
+                                    source={Bookmark}
+                                />
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() =>
+                                    alert(
+                                        "Feature under development! Thanks for understanding (only if u understand)"
+                                    )
+                                }
+                                style={{ marginRight: 14 }}
+                            >
+                                <Image
+                                    className="h-6 w-6"
+                                    source={Bars}
+                                />
+                            </TouchableOpacity>
+                        </View>
                     ),
                     headerStyle: {
-                        height: 80, // Adjust this value as needed
+                        height: 100,
+                        borderBottomColor: "#ddd",
+                        borderBottomWidth: 0.5,
                     },
                     headerTitle: "",
                 }}

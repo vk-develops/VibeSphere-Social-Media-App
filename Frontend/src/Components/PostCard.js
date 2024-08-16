@@ -16,8 +16,7 @@ const PostCard = () => {
     };
 
     return (
-        <View>
-            <View className="w-full h-[0.5px] bg-[#c8c8c8] mt-6 mb-4"></View>
+        <View className="mt-6">
             <View className="flex items-start justify-start flex-row">
                 <TouchableOpacity
                     activeOpacity={0.7}
@@ -54,7 +53,10 @@ const PostCard = () => {
             <View className="my-3">
                 <Text
                     className="text-base text-paraColor-light"
-                    style={{ fontFamily: "jakartaMedium", lineHeight: "23%" }}
+                    style={{
+                        fontFamily: "jakartaMedium",
+                        // lineHeight: "23%",
+                    }}
                 >
                     {truncatedText}
                     <TouchableOpacity onPress={toggleTruncate}>
@@ -62,7 +64,7 @@ const PostCard = () => {
                             className="text-base text-headerColor-light -mb-1"
                             style={{
                                 fontFamily: "jakartaSemiBold",
-                                lineHeight: "23%",
+                                // lineHeight: "23%",
                             }}
                         >
                             {isExpanded ? "...Read Less" : "Read More"}
@@ -87,6 +89,7 @@ const PostCard = () => {
                     />
                 </View>
             </TouchableOpacity>
+            <View className="w-full h-[0.5px] bg-[#c8c8c8] mt-6 mb-4"></View>
         </View>
     );
 };
