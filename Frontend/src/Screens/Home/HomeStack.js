@@ -5,7 +5,7 @@ import {
 } from "@react-navigation/stack";
 import HomeScreen from "./HomeScreen";
 import { View, Text, Image, TouchableOpacity } from "react-native";
-import Logo from "../../../assets/images/BW-Logo.png";
+import Logo from "../../../assets/images/VibeSphere.png";
 import { Ionicons } from "@expo/vector-icons";
 
 const Stack = createStackNavigator();
@@ -19,23 +19,16 @@ const HomeStack = () => {
                 // options={{ headerShown: false }}
                 options={{
                     headerLeft: () => (
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                alignItems: "center",
-                                paddingLeft: 16,
-                            }}
-                        >
+                        <View className="flex flex-row items-center justify-start pl-4">
                             <Image
+                                className="h-7 w-9"
                                 source={Logo}
-                                style={{
-                                    width: 30,
-                                    height: 30,
-                                    marginRight: 10,
-                                }}
                             />
-                            <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                                App Name
+                            <Text
+                                className="text-xl text-headerColor-light pl-2"
+                                style={{ fontWeight: "bold" }}
+                            >
+                                VibeSphere
                             </Text>
                         </View>
                     ),
