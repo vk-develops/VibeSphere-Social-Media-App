@@ -1,11 +1,14 @@
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import React from "react";
+import PostCard from "../../Components/PostCard";
 
 const HomeScreen = () => {
     return (
-        <View>
-            <Text>HomeScreen</Text>
-        </View>
+        <ScrollView className="bg-bgColor-light">
+            <View className="px-4">
+                <PostCard />
+            </View>
+        </ScrollView>
     );
 };
 
