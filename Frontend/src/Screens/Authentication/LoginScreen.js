@@ -11,19 +11,45 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useState } from "react";
 import Logo from "../../../assets/images/BW-Logo.png";
 import Gl from "../../../assets/images/Google-Logo.png";
+import { useDispatch } from "react-redux";
+import { useLoginMutation } from "../../Redux/Services/usersAuthApiSlice";
+import { setCredentials } from "../../Redux/Features/usersAuthSlice";
+import AuthenticateLoader from "../../Components/AuthenticateLoader";
 
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const dispatch = useDispatch();
+
+    const [login, { isLoading }] = useLoginMutation();
+
+    const submitHandler = async () => {
+        try {
+            const response = await login({ email, password }).unwrap();
+
+            if (response.success) {
+                const userInfo = response.userInfo;
+                dispatch(setCredentials(userInfo));
+                // useSuccessToast({ msg: response.message });
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
+    if (isLoading) {
+        return <AuthenticateLoader />;
+    }
+
     return (
         <SafeAreaView>
             <StatusBar
-                backgroundColor="#5a03d5"
+                backgroundColor="#5465ff"
                 animated={true}
-                style="light"
+                style="dark"
             />
-            <ScrollView className=" bg-purple--800">
+            <ScrollView className=" bg-purple--500">
                 <View className="flex items-center  justify-center py-10">
                     <Image
                         source={Logo}
@@ -34,7 +60,7 @@ const LoginScreen = ({ navigation }) => {
                 <View className="p-5 flex-1 bg-bgColor-light rounded-t-[30px]">
                     <View className="pt-2">
                         <Text
-                            className="text-3xl text-purple--950"
+                            className="text-3xl text-headerColor-light"
                             style={{ fontFamily: "jakartaBold" }}
                         >
                             Login{" "}
@@ -96,7 +122,8 @@ const LoginScreen = ({ navigation }) => {
                     <View>
                         <TouchableOpacity
                             activeOpacity={0.8}
-                            className="bg-purple--800 flex items-center justify-center py-[14px] rounded-full mt-10"
+                            onPress={submitHandler}
+                            className="bg-purple--500 flex items-center justify-center py-[14px] rounded-full mt-10"
                         >
                             <Text
                                 className="text-white text-xl"
