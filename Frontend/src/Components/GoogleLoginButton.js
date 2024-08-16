@@ -16,14 +16,18 @@ const discovery = {
 const GoogleLoginButton = () => {
     const dispatch = useDispatch();
 
+    const redirectUri = makeRedirectUri({
+        native: "VibeSphere://redirect", // Custom scheme for your app
+        // useProxy: true, // Enables Expo's proxy for development
+    });
+
+    console.log("Generated Redirect URI:", redirectUri);
+
     const [request, response, promptAsync] = useAuthRequest(
         {
-            clientId: GOOGLE_CLIENT_ID,
+            clientId: "your-google-client-id",
             scopes: ["profile", "email"],
-            redirectUri: makeRedirectUri({
-                native: "VibeSphere://redirect",
-                useProxy: true,
-            }),
+            redirectUri,
         },
         discovery
     );
