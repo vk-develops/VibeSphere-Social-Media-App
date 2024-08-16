@@ -1,5 +1,9 @@
 import { View, Text, Image, Dimensions, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
+import Heart from "../../assets/icons/heart.png";
+import Comment from "../../assets/icons/message-round.png";
+import Share from "../../assets/icons/Send.png";
+import Bookmark from "../../assets/icons/bookmar-save.png";
 
 const width = Dimensions.get("window").width;
 
@@ -89,6 +93,53 @@ const PostCard = () => {
                     />
                 </View>
             </TouchableOpacity>
+            <View className="flex-row items-center justify-between">
+                <View className="flex-row items-center justify-start my-3">
+                    <View className="flex-row items-center justify-start">
+                        <Image
+                            className="h-6 w-6"
+                            source={Heart}
+                        />
+                        <Text
+                            className="text-sm pl-1"
+                            style={{ fontFamily: "jakartaMedium" }}
+                        >
+                            263
+                        </Text>
+                    </View>
+                    <View className="flex-row items-center justify-start mx-4">
+                        <Image
+                            className="h-6 w-6"
+                            source={Comment}
+                        />
+                        <Text
+                            className="text-sm pl-1"
+                            style={{ fontFamily: "jakartaMedium" }}
+                        >
+                            263
+                        </Text>
+                    </View>
+                    <View>
+                        <Image
+                            className="h-6 w-6"
+                            source={Share}
+                        />
+                    </View>
+                </View>
+                <TouchableOpacity
+                    onPress={() =>
+                        alert(
+                            "Feature under development! Thanks for understanding (only if u understand)"
+                        )
+                    }
+                >
+                    <Image
+                        className="h-6 w-6"
+                        source={Bookmark}
+                    />
+                </TouchableOpacity>
+            </View>
+
             <View className="w-full h-[0.5px] bg-[#c8c8c8] mt-6 mb-4"></View>
         </View>
     );
