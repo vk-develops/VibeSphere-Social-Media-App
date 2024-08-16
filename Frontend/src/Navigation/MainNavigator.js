@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { BASE_URL, AUTH_URL } from "../Redux/constants";
 import { setCredentials } from "../Redux/Features/usersAuthSlice";
-import HomeStack from "../Screens/Home/HomeStack";
 import OnboardingStack from "../Screens/Onboarding/OnboardingStack";
+import TabNavigator from "./TabNavigator";
 
 const MainNavigator = () => {
     const { isAuthenticated } = useSelector((state) => state.auth);
@@ -44,7 +44,7 @@ const MainNavigator = () => {
         );
     }
 
-    return isAuthenticated ? <HomeStack /> : <OnboardingStack />;
+    return isAuthenticated ? <TabNavigator /> : <OnboardingStack />;
 };
 
 export default MainNavigator;
