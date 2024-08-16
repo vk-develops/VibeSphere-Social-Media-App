@@ -7,6 +7,8 @@ const HomeScreen = () => {
         <ScrollView className="bg-bgColor-light">
             <View className="px-4">
                 <PostCard />
+                <PostCard />
+                <PostCard />
             </View>
         </ScrollView>
     );

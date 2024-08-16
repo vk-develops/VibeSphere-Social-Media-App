@@ -17,9 +17,12 @@ const PostCard = () => {
 
     return (
         <View>
-            <View className="w-full h-[0.5px] bg-[#c8c8c8] mb-4"></View>
-            <View className="flex items-start justify-start flex-row gap-2">
-                <View className="bg-black h-12 w-12 flex items-center justify-center rounded-full overflow-hidden">
+            <View className="w-full h-[0.5px] bg-[#c8c8c8] mt-6 mb-4"></View>
+            <View className="flex items-start justify-start flex-row">
+                <TouchableOpacity
+                    activeOpacity={0.7}
+                    className="bg-black h-11 w-11 flex items-center justify-center rounded-full overflow-hidden"
+                >
                     <Image
                         style={{
                             height: "100%",
@@ -30,14 +33,16 @@ const PostCard = () => {
                             uri: "https://i.pinimg.com/236x/34/93/6a/34936a4c4b8c944126b31c6d145f6959.jpg",
                         }}
                     />
-                </View>
-                <View>
-                    <Text
-                        className="text-base text-headerColor-light"
-                        style={{ fontFamily: "jakartaBold" }}
-                    >
-                        Akshaya Shree
-                    </Text>
+                </TouchableOpacity>
+                <View className="pl-2 -mt-1">
+                    <TouchableOpacity activeOpacity={0.7}>
+                        <Text
+                            className="text-base text-headerColor-light"
+                            style={{ fontFamily: "jakartaBold" }}
+                        >
+                            Akshaya Shree
+                        </Text>
+                    </TouchableOpacity>
                     <Text
                         className="text-xs text-[#aaa] pt-1"
                         style={{ fontFamily: "jakartaSemiBold" }}
