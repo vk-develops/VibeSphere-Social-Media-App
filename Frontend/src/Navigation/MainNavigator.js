@@ -2,6 +2,7 @@ import { View, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { BASE_URL, AUTH_URL } from "../Redux/constants";
+import { setCredentials } from "../Redux/Features/usersAuthSlice";
 import HomeStack from "../Screens/Home/HomeStack";
 import OnboardingStack from "../Screens/Onboarding/OnboardingStack";
 
@@ -25,7 +26,7 @@ const MainNavigator = () => {
                 dispatch(setCredentials(userInfo));
             }
         } catch (err) {
-            console.log(err.message);
+            console.log("err", err);
         } finally {
             setIsLoading(false);
         }

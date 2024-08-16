@@ -34,7 +34,7 @@ const LoginScreen = ({ navigation }) => {
                 // useSuccessToast({ msg: response.message });
             }
         } catch (error) {
-            console.log(error.message);
+            console.log("error", error);
         }
     };
 
