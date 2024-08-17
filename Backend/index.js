@@ -5,6 +5,7 @@ import express from "express";
 import cors from "cors";
 import passport from "passport";
 import cookieParser from "cookie-parser";
+import { v2 as cloudinary } from "cloudinary";
 import connectDB from "./Config/db.js";
 import authRoute from "./Routes/authRoute.js";
 import accountRoute from "./Routes/accountRoute.js";
@@ -22,6 +23,13 @@ app.use(cookieParser());
 
 app.use(passport.initialize());
 // app.use(passport.session());
+
+//Cloudinary init
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_CLOUD_API_KEY,
+    api_secret: process.env.CLOUDINARY_CLOUD_API_SECRET_KEY,
+});
 
 //HTTP GET Method Test
 app.get("/api/v1/", (req, res) => {
