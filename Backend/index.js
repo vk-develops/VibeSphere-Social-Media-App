@@ -9,6 +9,7 @@ import { v2 as cloudinary } from "cloudinary";
 import connectDB from "./Config/db.js";
 import authRoute from "./Routes/authRoute.js";
 import accountRoute from "./Routes/accountRoute.js";
+import postRoute from "./Routes/postRoute.js";
 import "./Config/passportConfig.js";
 
 //App init
@@ -39,6 +40,7 @@ app.get("/api/v1/", (req, res) => {
 //API's
 app.use("/api/v1/users/auth", authRoute);
 app.use("/api/v1/users/account", accountRoute);
+app.use("/api/v1/users/posts", postRoute);
 
 //App listen
 app.listen(PORT, () => {

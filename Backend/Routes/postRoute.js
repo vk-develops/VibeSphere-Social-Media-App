@@ -1,5 +1,7 @@
 import express from "express";
 import multer from "multer";
+import { createPost } from "../Controllers/postController.js";
+import { protect } from "../Middlewares/authMiddleware.js";
 
 //Router init
 const router = express.Router();
@@ -13,7 +15,12 @@ const upload = multer({
 
 router.get("/get-all-posts");
 router.get("/get-post");
-router.post("/create-post");
+router.post(
+    "/create-post",
+    protect,
+    upload.array("mediaFiles", 10),
+    createPost
+);
 router.put("/update-post");
 router.delete("/delete-post");
 
