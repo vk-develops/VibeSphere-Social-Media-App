@@ -17,8 +17,6 @@ const postSchema = mongoose.Schema(
                     type: String,
                     required: true,
                 },
-            },
-            {
                 mediaType: {
                     type: String,
                     enum: ["Image", "Video"],

@@ -1,30 +1,38 @@
 import cloudinary from "cloudinary";
+import { v2 as cloudinaryV2 } from "cloudinary";
 
 const uploadMediaFiles = async (mediaFiles) => {
-    const uploadPromises = mediaFiles.map(async (file) => {
-        try {
-            const res = await cloudinary.v2.uploader
-                .upload_stream(
+    try {
+        // An array to hold all the upload promises
+        const uploadPromises = mediaFiles.map((file) => {
+            return new Promise((resolve, reject) => {
+                const uploadStream = cloudinaryV2.uploader.upload_stream(
                     {
-                        resource_type: file.mimetype.startsWith("video")
-                            ? "video"
-                            : "image",
+                        resource_type: file.mimetype.startsWith("image")
+                            ? "image"
+                            : "video",
                     },
                     (error, result) => {
-                        if (error) throw error;
-                        return result;
+                        if (error) {
+                            reject(error);
+                        } else {
+                            resolve(result.secure_url);
+                        }
                     }
-                )
-                .end(file.buffer);
+                );
 
-            return res.url;
-        } catch (error) {
-            console.error("Error uploading file to Cloudinary:", error);
-        }
-    });
+                // Write the file buffer to the upload stream
+                uploadStream.end(file.buffer);
+            });
+        });
 
-    const mediaUrls = await Promise.all(uploadPromises);
-    return mediaUrls;
+        // Wait for all the uploads to complete
+        const mediaUrls = await Promise.all(uploadPromises);
+
+        return mediaUrls;
+    } catch (error) {
+        console.error("Error uploading media files:", error);
+    }
 };
 
 export { uploadMediaFiles };

@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import User from "../Models/userModel.js";
 import Post from "../Models/postModel.js";
+import { uploadMediaFiles } from "../Helper/uploadMedia.js";
 
 // @desc    Create Post
 // @route   POST /api/v1/users/posts/create-post
@@ -28,12 +29,12 @@ const createPost = asyncHandler(async (req, res) => {
             // Upload media files to Cloudinary
             let media = [];
             if (mediaFiles && mediaFiles.length > 0) {
-                const mediaUrls = await uploadImages(mediaFiles);
+                const mediaUrls = await uploadMediaFiles(mediaFiles);
                 media = mediaUrls.map((url, index) => ({
                     url,
-                    type: mediaFiles[index].mimetype.startsWith("image")
-                        ? "image"
-                        : "video",
+                    mediaType: mediaFiles[index].mimetype.startsWith("image")
+                        ? "Image"
+                        : "Video",
                 }));
             }
 
@@ -48,6 +49,7 @@ const createPost = asyncHandler(async (req, res) => {
             await post.save();
 
             // Return success response
+            return res.status(201).json({ success: true, post });
         } else {
             return res.status(400).json({
                 success: false,
