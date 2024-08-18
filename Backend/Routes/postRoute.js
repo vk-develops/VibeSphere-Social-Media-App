@@ -1,6 +1,6 @@
 import express from "express";
 import multer from "multer";
-import { createPost } from "../Controllers/postController.js";
+import { createPost, getAllPosts } from "../Controllers/postController.js";
 import { protect } from "../Middlewares/authMiddleware.js";
 
 //Router init
@@ -13,7 +13,7 @@ const upload = multer({
     limits: { fileSize: 50 * 1024 * 1024 },
 });
 
-router.get("/get-all-posts");
+router.get("/get-all-posts", protect, getAllPosts);
 router.get("/get-post");
 router.post(
     "/create-post",
