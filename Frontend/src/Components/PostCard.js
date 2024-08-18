@@ -7,13 +7,25 @@ import Bookmark from "../../assets/icons/bookmar-save.png";
 
 const width = Dimensions.get("window").width;
 
+const formatDateCustom = (dateString) => {
+    const date = new Date(dateString);
+
+    const day = date.getDate().toString().padStart(2, "0"); // "27"
+    const month = date.toLocaleString("en-GB", { month: "short" }); // "Aug"
+    const year = date.getFullYear(); // "2024"
+
+    const hours = date.getHours().toString().padStart(2, "0"); // "12"
+    const minutes = date.getMinutes().toString().padStart(2, "0"); // "29"
+
+    return `${day} ${month} ${year} : ${hours}:${minutes}`;
+};
+
 const PostCard = ({ post, navigation }) => {
     const user = post.user;
 
     const [isExpanded, setIsExpanded] = useState(false);
 
-    const text =
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+    const text = post.caption;
 
     const truncatedText = isExpanded ? text : `${text.slice(0, 70)}...`;
 
@@ -52,7 +64,7 @@ const PostCard = ({ post, navigation }) => {
                         className="text-xs text-[#aaa] pt-1"
                         style={{ fontFamily: "jakartaSemiBold" }}
                     >
-                        27 Aug 2024 : 17:29
+                        {formatDateCustom(post.createdAt)}
                     </Text>
                 </View>
             </View>

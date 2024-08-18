@@ -34,7 +34,12 @@ const HomeScreen = ({ navigation }) => {
         );
     }
 
-    const renderPosts = ({ item }) => <PostCard post={item} />;
+    const renderPosts = ({ item }) => (
+        <PostCard
+            post={item}
+            navigation={navigation}
+        />
+    );
     return (
         <ScrollView className="bg-bgColor-light">
             <StatusBar
