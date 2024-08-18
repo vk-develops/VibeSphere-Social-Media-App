@@ -1,9 +1,40 @@
-import { View, Text, ScrollView } from "react-native";
+import {
+    View,
+    Text,
+    ScrollView,
+    FlatList,
+    ActivityIndicator,
+} from "react-native";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import PostCard from "../../Components/PostCard";
+import { useGetAllPostsQuery } from "../../Redux/Services/usersPostApiSlice";
 
 const HomeScreen = ({ navigation }) => {
+    const { data, isLoading, isError } = useGetAllPostsQuery({
+        page: 1,
+        limit: 10,
+    });
+
+    const posts = data?.data?.Posts;
+
+    if (isLoading) {
+        return (
+            <View className="flex-1 justify-center items-center">
+                <ActivityIndicator size="large" />
+            </View>
+        );
+    }
+
+    if (isError) {
+        return (
+            <View className="flex-1 justify-center items-center">
+                <Text>Error fetching posts!</Text>
+            </View>
+        );
+    }
+
+    const renderPosts = ({ item }) => <PostCard post={item} />;
     return (
         <ScrollView className="bg-bgColor-light">
             <StatusBar
@@ -11,9 +42,11 @@ const HomeScreen = ({ navigation }) => {
                 style="dark"
             />
             <View className="px-4">
-                <PostCard navigation={navigation} />
-                <PostCard navigation={navigation} />
-                <PostCard navigation={navigation} />
+                <FlatList
+                    data={posts}
+                    keyExtractor={(item) => item._id}
+                    renderItem={renderPosts}
+                />
             </View>
         </ScrollView>
     );

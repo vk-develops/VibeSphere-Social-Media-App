@@ -7,7 +7,9 @@ import Bookmark from "../../assets/icons/bookmar-save.png";
 
 const width = Dimensions.get("window").width;
 
-const PostCard = ({ navigation }) => {
+const PostCard = ({ post, navigation }) => {
+    const user = post.user;
+
     const [isExpanded, setIsExpanded] = useState(false);
 
     const text =
@@ -43,7 +45,7 @@ const PostCard = ({ navigation }) => {
                             className="text-base text-headerColor-light"
                             style={{ fontFamily: "jakartaBold" }}
                         >
-                            Akshaya Shree
+                            {user.name}
                         </Text>
                     </TouchableOpacity>
                     <Text
