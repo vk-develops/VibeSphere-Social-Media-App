@@ -30,8 +30,8 @@ const formatDateCustom = (dateString) => {
 const renderMediaItem = ({ item }) => (
     <Image
         style={{
-            height: width,
-            width: width,
+            height: "100%",
+            width: width - 32,
             resizeMode: "cover",
         }}
         source={{ uri: item.url }}
