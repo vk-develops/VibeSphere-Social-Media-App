@@ -1,4 +1,11 @@
-import { View, Text, Image, Dimensions, TouchableOpacity } from "react-native";
+import {
+    View,
+    Text,
+    Image,
+    Dimensions,
+    TouchableOpacity,
+    FlatList,
+} from "react-native";
 import React, { useState } from "react";
 import Heart from "../../assets/icons/heart.png";
 import Comment from "../../assets/icons/message-round.png";
@@ -19,6 +26,18 @@ const formatDateCustom = (dateString) => {
 
     return `${day} ${month} ${year} : ${hours}:${minutes}`;
 };
+
+const renderMediaItem = ({ item }) => (
+    <Image
+        style={{
+            height: width,
+            width: width,
+            resizeMode: "cover",
+        }}
+        source={{ uri: item.url }}
+        onError={() => console.log("Image failed to load")}
+    />
+);
 
 const PostCard = ({ post, navigation }) => {
     const user = post.user;
@@ -51,6 +70,7 @@ const PostCard = ({ post, navigation }) => {
                         }}
                     />
                 </TouchableOpacity>
+
                 <View className="pl-2 -mt-1">
                     <TouchableOpacity activeOpacity={0.7}>
                         <Text
@@ -90,30 +110,28 @@ const PostCard = ({ post, navigation }) => {
                     </TouchableOpacity>
                 </Text>
             </View>
-            <TouchableOpacity
-                onPress={() =>
-                    navigation.navigate("PostDetail", {
-                        image: "https://cdn.pixabay.com/photo/2024/04/25/19/49/ai-generated-8720625_640.png",
-                        text,
-                    })
-                }
+            <View
+            // onPress={() =>
+            //     navigation.navigate("PostDetail", {
+            //         image: "https://cdn.pixabay.com/photo/2024/04/25/19/49/ai-generated-8720625_640.png",
+            //         text,
+            //     })
+            // }
             >
                 <View
                     className="rounded-3xl overflow-hidden mt-3"
                     style={{ height: width - 16 }}
                 >
-                    <Image
-                        style={{
-                            height: "100%",
-                            width: "100%",
-                            resizeMode: "cover",
-                        }}
-                        source={{
-                            uri: "https://cdn.pixabay.com/photo/2024/04/25/19/49/ai-generated-8720625_640.png",
-                        }}
+                    <FlatList
+                        data={post.media || []}
+                        keyExtractor={(item) => item._id || item.url}
+                        renderItem={renderMediaItem}
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        pagingEnabled
                     />
                 </View>
-            </TouchableOpacity>
+            </View>
             <View className="flex-row items-center justify-between mt-1">
                 <View className="flex-row items-center justify-start my-3">
                     <View className="flex-row items-center justify-start">

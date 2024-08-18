@@ -41,19 +41,17 @@ const HomeScreen = ({ navigation }) => {
         />
     );
     return (
-        <ScrollView className="bg-bgColor-light">
+        <View className="px-4 bg-bgColor-light">
             <StatusBar
                 backgroundColor="#fff"
                 style="dark"
             />
-            <View className="px-4">
-                <FlatList
-                    data={posts}
-                    keyExtractor={(item) => item._id}
-                    renderItem={renderPosts}
-                />
-            </View>
-        </ScrollView>
+            <FlatList
+                data={posts}
+                keyExtractor={(item) => item._id}
+                renderItem={renderPosts}
+            />
+        </View>
     );
 };
 
