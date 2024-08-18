@@ -7,10 +7,12 @@ import {
     FlatList,
 } from "react-native";
 import React, { useState } from "react";
+import { Video } from "expo-av";
 import Heart from "../../assets/icons/heart.png";
 import Comment from "../../assets/icons/message-round.png";
 import Share from "../../assets/icons/Send.png";
 import Bookmark from "../../assets/icons/bookmar-save.png";
+import renderMediaItem from "./RenderMediaItem";
 
 const width = Dimensions.get("window").width;
 
@@ -26,18 +28,6 @@ const formatDateCustom = (dateString) => {
 
     return `${day} ${month} ${year} : ${hours}:${minutes}`;
 };
-
-const renderMediaItem = ({ item }) => (
-    <Image
-        style={{
-            height: "100%",
-            width: width - 32,
-            resizeMode: "cover",
-        }}
-        source={{ uri: item.url }}
-        onError={() => console.log("Image failed to load")}
-    />
-);
 
 const PostCard = ({ post, navigation }) => {
     const user = post.user;
