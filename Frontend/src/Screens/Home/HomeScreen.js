@@ -1,5 +1,5 @@
 import { View, Text, FlatList, ActivityIndicator } from "react-native";
-import React from "react";
+import React, { useRef, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import PostCard from "../../Components/PostCard";
 import { useGetAllPostsQuery } from "../../Redux/Services/usersPostApiSlice";
@@ -11,6 +11,8 @@ const HomeScreen = ({ navigation }) => {
     });
 
     const posts = data?.data?.Posts;
+    const [visiblePostIndex, setVisiblePostIndex] = useState(null);
+    const postFlatListRef = useRef(null);
 
     if (isLoading) {
         return (
@@ -28,12 +30,24 @@ const HomeScreen = ({ navigation }) => {
         );
     }
 
-    const renderPosts = ({ item }) => (
+    const renderPosts = ({ item, index }) => (
         <PostCard
             post={item}
             navigation={navigation}
+            isVisible={index === visiblePostIndex}
         />
     );
+
+    const handleViewableItemsChanged = ({ viewableItems }) => {
+        if (viewableItems.length > 0) {
+            setVisiblePostIndex(viewableItems[0]?.index);
+        }
+    };
+
+    const viewabilityConfig = {
+        itemVisiblePercentThreshold: 50,
+    };
+
     return (
         <View className="px-4 bg-bgColor-light">
             <StatusBar
@@ -41,9 +55,12 @@ const HomeScreen = ({ navigation }) => {
                 style="dark"
             />
             <FlatList
+                ref={postFlatListRef}
                 data={posts}
                 keyExtractor={(item) => item._id}
                 renderItem={renderPosts}
+                onViewableItemsChanged={handleViewableItemsChanged}
+                viewabilityConfig={viewabilityConfig}
             />
         </View>
     );

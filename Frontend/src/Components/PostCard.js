@@ -6,7 +6,7 @@ import {
     TouchableOpacity,
     FlatList,
 } from "react-native";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Heart from "../../assets/icons/heart.png";
 import Comment from "../../assets/icons/message-round.png";
 import Share from "../../assets/icons/Send.png";
@@ -30,7 +30,7 @@ const formatDateCustom = (dateString) => {
     return `${day} ${month} ${year} : ${hours}:${minutes}`;
 };
 
-const PostCard = ({ post, navigation }) => {
+const PostCard = ({ post, navigation, isVisible }) => {
     const user = post.user;
 
     const [isExpanded, setIsExpanded] = useState(false);
@@ -45,13 +45,19 @@ const PostCard = ({ post, navigation }) => {
         setIsExpanded((prevExpanded) => !prevExpanded);
     };
 
+    useEffect(() => {
+        if (!isVisible) {
+            setCurrentPlayingIndex(null);
+        }
+    }, [isVisible]);
+
     const renderMediaItem = ({ item, index }) => {
         if (item.mediaType === "Video") {
             return (
                 <DisplayVideo
                     item={item}
                     index={index}
-                    isPlaying={index === currentPlayingIndex}
+                    isPlaying={index === currentPlayingIndex && isVisible}
                 />
             );
         } else {
@@ -74,7 +80,7 @@ const PostCard = ({ post, navigation }) => {
     };
 
     const viewabilityConfig = {
-        itemVisiblePercentThreshold: 50, // Percentage of item visibility to trigger viewable state
+        itemVisiblePercentThreshold: 50,
     };
 
     return (
