@@ -7,11 +7,12 @@ import {
     FlatList,
 } from "react-native";
 import React, { useRef, useState } from "react";
-import { Video } from "expo-av";
 import Heart from "../../assets/icons/heart.png";
 import Comment from "../../assets/icons/message-round.png";
 import Share from "../../assets/icons/Send.png";
 import Bookmark from "../../assets/icons/bookmar-save.png";
+import DisplayVideo from "./DisplayVideo";
+import DisplayImages from "./DisplayImages";
 // import renderMediaItem from "./RenderMediaItem";
 
 const width = Dimensions.get("window").width;
@@ -33,8 +34,6 @@ const PostCard = ({ post, navigation }) => {
     const user = post.user;
 
     const [isExpanded, setIsExpanded] = useState(false);
-    const [currentVideoIndex, setCurrentVideoIndex] = useState(null);
-    const videoRefs = useRef([]);
 
     const text = post.caption;
 
@@ -46,38 +45,9 @@ const PostCard = ({ post, navigation }) => {
 
     const renderMediaItem = ({ item, index }) => {
         if (item.mediaType === "Video") {
-            return (
-                <View>
-                    <Video
-                        source={{ uri: item.url }}
-                        style={{
-                            height: "100%",
-                            width: width - 32,
-                        }}
-                        rate={1.0}
-                        volume={1.0}
-                        // isMuted={false}
-                        resizeMode="contain"
-                        shouldPlay={true}
-                        isLooping={false}
-                        useNativeControls
-                    />
-                </View>
-            );
+            return <DisplayVideo item={item} />;
         } else {
-            return (
-                <View>
-                    <Image
-                        style={{
-                            height: "100%",
-                            width: width - 32,
-                            resizeMode: "cover",
-                        }}
-                        source={{ uri: item.url }}
-                        onError={() => console.log("Image failed to load")}
-                    />
-                </View>
-            );
+            return <DisplayImages item={item} />;
         }
     };
 
