@@ -3,7 +3,7 @@ import React from "react";
 
 const width = Dimensions.get("window").width;
 
-const DisplayImages = ({ item }) => {
+const DisplayImages = ({ item, index }) => {
     return (
         <View>
             <Image

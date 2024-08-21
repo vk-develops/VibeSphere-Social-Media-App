@@ -1,10 +1,4 @@
-import {
-    View,
-    Text,
-    ScrollView,
-    FlatList,
-    ActivityIndicator,
-} from "react-native";
+import { View, Text, FlatList, ActivityIndicator } from "react-native";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import PostCard from "../../Components/PostCard";

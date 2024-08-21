@@ -1,23 +1,31 @@
 import { View, Dimensions } from "react-native";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Video } from "expo-av";
 
 const width = Dimensions.get("window").width;
 
-const DisplayVideo = ({ item }) => {
-    const videoRefs = useRef([]);
+const DisplayVideo = ({ item, index, isPlaying }) => {
+    const videoRef = useRef(null);
+
+    useEffect(() => {
+        if (isPlaying) {
+            videoRef.current?.playAsync();
+        } else {
+            videoRef.current?.pauseAsync();
+        }
+    }, [isPlaying]);
 
     return (
         <View>
             <Video
-                source={{ uri: item.url }}
+                source={{
+                    uri: "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
+                }}
                 style={{
                     height: "100%",
                     width: width - 32,
                 }}
-                // ref={(ref) => {
-                //     videoRefs.current[index] = ref;
-                // }}
+                ref={videoRef}
                 rate={1.0}
                 volume={1.0}
                 // isMuted={false}

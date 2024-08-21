@@ -34,6 +34,8 @@ const PostCard = ({ post, navigation }) => {
     const user = post.user;
 
     const [isExpanded, setIsExpanded] = useState(false);
+    const [currentPlayingIndex, setCurrentPlayingIndex] = useState(null);
+    const flatListRef = useRef(null);
 
     const text = post.caption;
 
@@ -45,10 +47,34 @@ const PostCard = ({ post, navigation }) => {
 
     const renderMediaItem = ({ item, index }) => {
         if (item.mediaType === "Video") {
-            return <DisplayVideo item={item} />;
+            return (
+                <DisplayVideo
+                    item={item}
+                    index={index}
+                    isPlaying={index === currentPlayingIndex}
+                />
+            );
         } else {
-            return <DisplayImages item={item} />;
+            return (
+                <DisplayImages
+                    item={item}
+                    index={index}
+                />
+            );
         }
+    };
+
+    const handleViewableItemsChanged = ({ viewableItems }) => {
+        if (viewableItems.length > 0) {
+            const index = viewableItems[0]?.index;
+            if (index !== currentPlayingIndex) {
+                setCurrentPlayingIndex(index);
+            }
+        }
+    };
+
+    const viewabilityConfig = {
+        itemVisiblePercentThreshold: 50, // Percentage of item visibility to trigger viewable state
     };
 
     return (
@@ -122,12 +148,15 @@ const PostCard = ({ post, navigation }) => {
                     style={{ height: width - 16 }}
                 >
                     <FlatList
+                        ref={flatListRef}
                         data={post.media || []}
                         keyExtractor={(item) => item._id || item.url}
                         renderItem={renderMediaItem}
                         horizontal
                         showsHorizontalScrollIndicator={false}
                         pagingEnabled
+                        onViewableItemsChanged={handleViewableItemsChanged}
+                        viewabilityConfig={viewabilityConfig}
                     />
                 </View>
             </View>
