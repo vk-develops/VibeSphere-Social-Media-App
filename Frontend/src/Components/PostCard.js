@@ -166,7 +166,7 @@ const PostCard = ({ post, navigation, isVisible }) => {
                     />
                 </View>
             </View>
-            <View className="flex-row items-center justify-between mt-1">
+            <View className="flex-row items-center justify-between mt-3">
                 <View className="flex-row items-center justify-start my-3">
                     <View className="flex-row items-center justify-start">
                         <Image
@@ -201,15 +201,16 @@ const PostCard = ({ post, navigation, isVisible }) => {
                 </View>
                 <TouchableOpacity
                     onPress={() =>
-                        alert(
-                            "Feature under development! Thanks for understanding (only if u understand)"
-                        )
+                        navigation.navigate("PostDetail", { postDetail: post })
                     }
+                    className="bg-purple--500 rounded-lg"
                 >
-                    <Image
-                        className="h-6 w-6"
-                        source={Bookmark}
-                    />
+                    <Text
+                        className="text-sm text-white px-5 py-2"
+                        style={{ fontFamily: "jakartaSemiBold" }}
+                    >
+                        View Details
+                    </Text>
                 </TouchableOpacity>
             </View>
 
