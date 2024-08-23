@@ -11,8 +11,15 @@ const HomeScreen = ({ navigation }) => {
     });
 
     const posts = data?.data?.Posts;
-    const [visiblePostIndex, setVisiblePostIndex] = useState(null);
-    const postFlatListRef = useRef(null);
+    const [viewableItems, setViewableItems] = useState([]);
+
+    const viewabilityConfig = {
+        itemVisiblePercentThreshold: 50,
+    };
+
+    const onViewableItemsChanged = useRef(({ viewableItems }) => {
+        setViewableItems(viewableItems.map(({ item }) => item._id));
+    });
 
     if (isLoading) {
         return (
@@ -30,23 +37,13 @@ const HomeScreen = ({ navigation }) => {
         );
     }
 
-    const renderPosts = ({ item, index }) => (
+    const renderPosts = ({ item }) => (
         <PostCard
             post={item}
             navigation={navigation}
-            isVisible={index === visiblePostIndex}
+            isVisible={viewableItems.includes(item._id)}
         />
     );
-
-    const handleViewableItemsChanged = ({ viewableItems }) => {
-        if (viewableItems.length > 0) {
-            setVisiblePostIndex(viewableItems[0]?.index);
-        }
-    };
-
-    const viewabilityConfig = {
-        itemVisiblePercentThreshold: 50,
-    };
 
     return (
         <View className="px-4 bg-bgColor-light">
@@ -55,11 +52,10 @@ const HomeScreen = ({ navigation }) => {
                 style="dark"
             />
             <FlatList
-                ref={postFlatListRef}
                 data={posts}
                 keyExtractor={(item) => item._id}
                 renderItem={renderPosts}
-                onViewableItemsChanged={handleViewableItemsChanged}
+                onViewableItemsChanged={onViewableItemsChanged.current}
                 viewabilityConfig={viewabilityConfig}
             />
         </View>

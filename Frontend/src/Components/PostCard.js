@@ -48,6 +48,8 @@ const PostCard = ({ post, navigation, isVisible }) => {
     useEffect(() => {
         if (!isVisible) {
             setCurrentPlayingIndex(null);
+        } else if (currentPlayingIndex !== null) {
+            setCurrentPlayingIndex(currentPlayingIndex);
         }
     }, [isVisible]);
 
@@ -73,9 +75,7 @@ const PostCard = ({ post, navigation, isVisible }) => {
     const handleViewableItemsChanged = ({ viewableItems }) => {
         if (viewableItems.length > 0) {
             const index = viewableItems[0]?.index;
-            if (index !== currentPlayingIndex) {
-                setCurrentPlayingIndex(index);
-            }
+            setCurrentPlayingIndex(index);
         }
     };
 

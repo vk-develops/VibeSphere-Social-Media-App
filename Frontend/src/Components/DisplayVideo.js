@@ -8,6 +8,7 @@ const DisplayVideo = ({ item, index, isPlaying }) => {
     const videoRef = useRef(null);
 
     useEffect(() => {
+        console.log(`Video ${index} isPlaying: ${isPlaying}`);
         if (isPlaying) {
             videoRef.current?.playAsync();
         } else {

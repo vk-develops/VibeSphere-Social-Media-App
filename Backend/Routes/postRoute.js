@@ -23,6 +23,8 @@ router.post(
 );
 router.put("/update-post");
 router.delete("/delete-post");
+router.get("/search-post");
+router.get("get-related-posts");
 
 //Exports
 export default router;
