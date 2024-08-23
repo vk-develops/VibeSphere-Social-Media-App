@@ -43,10 +43,11 @@ const getAllPosts = asyncHandler(async (req, res) => {
 // @desc    Create Post
 // @route   POST /api/v1/users/posts/create-post
 // @access  Private
-
 const createPost = asyncHandler(async (req, res) => {
     try {
-        const { title, caption, tags } = req.body;
+        const { title, caption } = req.body;
+
+        let { tags } = req.body;
 
         const mediaFiles = req.files;
 
@@ -58,6 +59,11 @@ const createPost = asyncHandler(async (req, res) => {
                 success: false,
                 message: "Title, caption, and at least one tag are required",
             });
+        }
+
+        // Ensuring tags is an array
+        if (typeof tags === "string") {
+            tags = tags.split(",").map((tag) => tag.trim());
         }
 
         //Find the user
