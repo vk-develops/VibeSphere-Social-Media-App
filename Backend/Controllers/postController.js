@@ -46,17 +46,18 @@ const getAllPosts = asyncHandler(async (req, res) => {
 
 const createPost = asyncHandler(async (req, res) => {
     try {
-        const { caption } = req.body;
+        const { title, caption, tags } = req.body;
 
         const mediaFiles = req.files;
 
         //Getting the id from the protect route
         const id = req.user._id;
 
-        if (!caption) {
-            return res
-                .status(400)
-                .json({ success: false, message: "Caption is required" });
+        if (!title || !caption || !tags || tags.length === 0) {
+            return res.status(400).json({
+                success: false,
+                message: "Title, caption, and at least one tag are required",
+            });
         }
 
         //Find the user
@@ -75,10 +76,17 @@ const createPost = asyncHandler(async (req, res) => {
                 }));
             }
 
+            // Capitalize tags
+            const capitalizedTags = tags.map(
+                (tag) => tag.charAt(0).toUpperCase() + tag.slice(1)
+            );
+
             // Create the post
             const post = new Post({
                 user: id,
+                title,
                 caption,
+                tags: capitalizedTags,
                 media,
             });
 
@@ -146,4 +154,4 @@ const getRelatedPosts = asyncHandler(async (req, res) => {
     }
 });
 
-export { createPost, getAllPosts };
+export { createPost, getAllPosts, getRelatedPosts };
