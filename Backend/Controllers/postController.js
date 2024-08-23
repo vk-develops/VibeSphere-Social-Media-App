@@ -99,4 +99,51 @@ const createPost = asyncHandler(async (req, res) => {
     }
 });
 
+// @desc    Get related Posts
+// @route   POST /api/v1/users/posts/get-related-posts
+// @access  Private
+
+const getRelatedPosts = asyncHandler(async (req, res) => {
+    try {
+        const { tags, id } = req.params;
+
+        if (!tags || !id) {
+            return res.status(400).json({
+                success: false,
+                message: "The tags and id are required",
+            });
+        }
+
+        // Capitalizing the type
+        const postTag = type.charAt(0).toUpperCase() + type.slice(1);
+
+        // Finding the original post
+        const originalPost = await Post.findById(id);
+        if (!originalPost) {
+            return res
+                .status(404)
+                .json({ success: false, message: "Post not found" });
+        }
+
+        const relatedPosts = await Post.find({
+            _id: { $ne: id },
+            tags: postTag,
+        }).limit(5);
+
+        if (relatedPosts.length === 0) {
+            return res
+                .status(404)
+                .json({ success: false, message: "No related posts found" });
+        }
+
+        res.status(200).json({
+            success: true,
+            data: { count: relatedPosts.length, posts: relatedPosts },
+        });
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).json({ success: false, err: err.message });
+    }
+});
+
 export { createPost, getAllPosts };
