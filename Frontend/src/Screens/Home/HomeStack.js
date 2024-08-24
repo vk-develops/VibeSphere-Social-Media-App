@@ -71,9 +71,10 @@ const HomeStack = () => {
                         </View>
                     ),
                     headerStyle: {
-                        height: 100,
+                        height: 65,
                         borderBottomColor: "#ddd",
                         borderBottomWidth: 0.5,
+                        // backgroundColor: "#555",
                     },
                     headerTitle: "",
                 }}
