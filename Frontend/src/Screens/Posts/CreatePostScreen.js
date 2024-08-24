@@ -12,7 +12,7 @@ import { Video } from "expo-av";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 
-const CreatePostScreen = () => {
+const CreatePostScreen = ({ navigation }) => {
     const [media, setMedia] = useState([]);
     const [hasCameraPermission, setHasCameraPermission] = useState(null);
 
@@ -70,6 +70,13 @@ const CreatePostScreen = () => {
 
         if (!result.canceled) {
             setMedia([...media, result.assets[0]]);
+        }
+    };
+
+    // Function to handle navigation
+    const handleContinue = (media) => {
+        if (media.length > 0) {
+            navigation.navigate("CreatePostCompletionScreen", media);
         }
     };
 
@@ -159,6 +166,7 @@ const CreatePostScreen = () => {
 
                 <TouchableOpacity
                     activeOpacity={media.length > 0 ? 0.8 : 1}
+                    onPress={() => handleContinue(media)}
                     className={`bg-slate-300 flex items-center justify-center rounded-2xl  ${
                         media.length > 0 && "bg-purple--500"
                     }`}

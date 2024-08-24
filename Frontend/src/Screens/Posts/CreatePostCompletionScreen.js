@@ -1,7 +1,11 @@
 import { View, Text, ScrollView } from "react-native";
 import React from "react";
 
-const CreatePostCompletionScreen = () => {
+const CreatePostCompletionScreen = ({ route }) => {
+    // const { media } = route.params;
+
+    // console.log(media);
+
     return (
         <ScrollView className="flex-1 bg-bgColor-light">
             <View className="flex-0.2">

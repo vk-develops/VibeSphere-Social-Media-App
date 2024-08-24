@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeStack from "../Screens/Home/HomeStack";
 import ProfileStack from "../Screens/Profile/ProfileStack";
 import CreatePostScreen from "../Screens/Posts/CreatePostScreen";
+import PostStack from "../Screens/Posts/PostStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -15,8 +16,8 @@ const TabNavigator = () => {
                 component={HomeStack}
             />
             <Tab.Screen
-                name="CreatePostTab"
-                component={CreatePostScreen}
+                name="PostTab"
+                component={PostStack}
             />
             <Tab.Screen
                 name="ProfileTab"
