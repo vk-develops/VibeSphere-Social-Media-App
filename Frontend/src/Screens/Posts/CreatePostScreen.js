@@ -74,9 +74,9 @@ const CreatePostScreen = ({ navigation }) => {
     };
 
     // Function to handle navigation
-    const handleContinue = (media) => {
+    const handleContinue = () => {
         if (media.length > 0) {
-            navigation.navigate("CreatePostCompletionScreen", media);
+            navigation.navigate("CreatePostCompletionScreen", { media: media });
         }
     };
 
@@ -166,7 +166,7 @@ const CreatePostScreen = ({ navigation }) => {
 
                 <TouchableOpacity
                     activeOpacity={media.length > 0 ? 0.8 : 1}
-                    onPress={() => handleContinue(media)}
+                    onPress={handleContinue}
                     className={`bg-slate-300 flex items-center justify-center rounded-2xl  ${
                         media.length > 0 && "bg-purple--500"
                     }`}
