@@ -72,16 +72,9 @@ const CreatePostScreen = () => {
     };
 
     return (
-        <ScrollView className="bg-bgColor-light">
-            <View className="m-5">
-                <Button
-                    title="Media"
-                    onPress={pickMedia}
-                />
-                <Button
-                    title="Take picture"
-                    onPress={takePicture}
-                />
+        <View className="bg-bgColor-light flex-1">
+            <View>
+                <Text className="text-2xl">Create Post</Text>
             </View>
             <View>
                 {media.map((file, index) =>
@@ -101,7 +94,7 @@ const CreatePostScreen = () => {
                     )
                 )}
             </View>
-        </ScrollView>
+        </View>
     );
 };
 
