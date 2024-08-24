@@ -12,6 +12,7 @@ import * as ImagePicker from "expo-image-picker";
 
 const CreatePostScreen = () => {
     const [media, setMedia] = useState([]);
+    const [hasCameraPermission, setHasCameraPermission] = useState(null);
 
     const pickMedia = async () => {
         if (media.length >= 5) {
@@ -35,12 +36,51 @@ const CreatePostScreen = () => {
         }
     };
 
+    const requestCameraPermission = async () => {
+        const cameraStatus = await ImagePicker.requestCameraPermissionsAsync();
+        setHasCameraPermission(cameraStatus.status === "granted");
+
+        if (cameraStatus.status !== "granted") {
+            Alert.alert(
+                "Permission Denied",
+                "You need to allow camera access to take pictures."
+            );
+        }
+    };
+
+    const takePicture = async () => {
+        if (hasCameraPermission === null) {
+            await requestCameraPermission();
+        }
+
+        if (media.length >= 5) {
+            Alert.alert(
+                "Limit Exceeded",
+                "You can only upload up to 5 media files."
+            );
+            return;
+        }
+
+        let result = await ImagePicker.launchCameraAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            quality: 1,
+        });
+
+        if (!result.canceled) {
+            setMedia([...media, result.assets[0]]);
+        }
+    };
+
     return (
         <ScrollView className="bg-bgColor-light">
             <View className="m-5">
                 <Button
                     title="Media"
                     onPress={pickMedia}
+                />
+                <Button
+                    title="Take picture"
+                    onPress={takePicture}
                 />
             </View>
             <View>
