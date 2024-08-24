@@ -1,5 +1,12 @@
-import { View, Text, ScrollView, TextInput } from "react-native";
+import {
+    View,
+    Text,
+    ScrollView,
+    TextInput,
+    TouchableOpacity,
+} from "react-native";
 import React, { useState } from "react";
+import { AntDesign } from "@expo/vector-icons";
 
 const CreatePostCompletionScreen = ({ route }) => {
     const { media } = route.params;
@@ -97,7 +104,24 @@ const CreatePostCompletionScreen = ({ route }) => {
                         style={{ fontFamily: "jakartaMedium" }}
                     />
                 </View>
-                <View className="mt-8">
+
+                <View className="mt-8 flex items-center justify-start flex-row flex-wrap">
+                    {tagsArray.map((tag, index) => (
+                        <View
+                            key={index}
+                            className="bg-purple--100 flex-row items-center rounded-full px-8 py-2 m-1"
+                        >
+                            <Text
+                                className=" text-headerColor-light"
+                                style={{ fontFamily: "jakartaMedium" }}
+                            >
+                                {tag}
+                            </Text>
+                        </View>
+                    ))}
+                </View>
+
+                <View className="mt-3">
                     <Text
                         className="text-xs uppercase text-headerColor-light pb-[8px]"
                         style={{
