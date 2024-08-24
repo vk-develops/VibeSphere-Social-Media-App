@@ -7,7 +7,7 @@ const CreatePostCompletionScreen = ({ route }) => {
     // console.log(media);
 
     return (
-        <ScrollView className="flex-1 bg-bgColor-light">
+        <ScrollView className="flex-1 bg-bgColor-light p-4">
             <View className="flex-0.2">
                 <Text
                     style={{ fontFamily: "jakartaBold" }}
