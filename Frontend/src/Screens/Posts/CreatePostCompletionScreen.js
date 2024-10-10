@@ -4,26 +4,15 @@ import {
     ScrollView,
     TextInput,
     TouchableOpacity,
+    FlatList,
 } from "react-native";
 import React, { useState } from "react";
-import { AntDesign } from "@expo/vector-icons";
+import { postCategories } from "../../Data/postCategories";
 
 const CreatePostCompletionScreen = ({ route }) => {
     const { media } = route.params;
 
-    const [tags, setTags] = useState("");
-    const [tagsArray, setTagsArray] = useState([]);
-
-    const handleTagChange = (text) => {
-        setTags(text);
-
-        const newTags = text
-            .split(",")
-            .map((tag) => tag.trim())
-            .filter((tag) => tag !== "");
-
-        setTagsArray(newTags);
-    };
+    const [selectedCategory, setSelectedCategory] = useState(null);
 
     // const uploadMedia = async () => {
     //     const formData = new FormData();
@@ -105,38 +94,27 @@ const CreatePostCompletionScreen = ({ route }) => {
                     />
                 </View>
 
-                <View className="mt-8 flex items-center justify-start flex-row flex-wrap">
-                    {tagsArray.map((tag, index) => (
-                        <View
-                            key={index}
-                            className="bg-purple--100 flex-row items-center rounded-full px-8 py-2 m-1"
-                        >
-                            <Text
-                                className=" text-headerColor-light"
-                                style={{ fontFamily: "jakartaMedium" }}
+                <View>
+                    <Text>Select a Category</Text>
+                    <FlatList
+                        data={postCategories}
+                        renderItem={({ item }) => (
+                            <TouchableOpacity
+                                onPress={() => setSelectedCategory(item)}
                             >
-                                {tag}
-                            </Text>
-                        </View>
-                    ))}
-                </View>
-
-                <View className="mt-3">
-                    <Text
-                        className="text-xs uppercase text-headerColor-light pb-[8px]"
-                        style={{
-                            letterSpacing: 3,
-                            fontFamily: "jakartaSemiBold",
-                        }}
-                    >
-                        Tags:
-                    </Text>
-                    <TextInput
-                        className="border-[1.5px] border-[#888] pt-1 pl-5 py-2 rounded-lg text-base text-[#888]"
-                        placeholder="Add tags seperated by commas"
-                        style={{ fontFamily: "jakartaMedium" }}
-                        value={tags}
-                        onChangeText={handleTagChange}
+                                <Text
+                                    style={{
+                                        color:
+                                            selectedCategory === item
+                                                ? "blue"
+                                                : "black",
+                                    }}
+                                >
+                                    {item}
+                                </Text>
+                            </TouchableOpacity>
+                        )}
+                        keyExtractor={(item) => item}
                     />
                 </View>
             </View>

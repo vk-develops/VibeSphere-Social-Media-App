@@ -1,11 +1,16 @@
-import { View, Text } from "react-native";
-import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import ProfileScreen from "./ProfileScreen";
+
+const Stack = createStackNavigator();
 
 const ProfileStack = () => {
     return (
-        <View>
-            <Text>ProfileStack</Text>
-        </View>
+        <Stack.Navigator>
+            <Stack.Screen
+                name="ProfileScreen"
+                component={ProfileScreen}
+            />
+        </Stack.Navigator>
     );
 };
 

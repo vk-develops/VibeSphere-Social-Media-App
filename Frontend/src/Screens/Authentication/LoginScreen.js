@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../../../assets/images/BW-Logo.png";
 import Gl from "../../../assets/images/Google-Logo.png";
 import { useDispatch } from "react-redux";
@@ -16,7 +16,39 @@ import { useLoginMutation } from "../../Redux/Services/usersAuthApiSlice";
 import { setCredentials } from "../../Redux/Features/usersAuthSlice";
 import AuthenticateLoader from "../../Components/AuthenticateLoader";
 
+import * as WebBrowser from "expo-web-browser";
+import * as AuthSession from "expo-auth-session";
+import { makeRedirectUri } from "expo-auth-session";
+
+WebBrowser.maybeCompleteAuthSession();
+
+// Configuration for Google OAuth
+const discovery = {
+    authorizationEndpoint: "https://accounts.google.com/o/oauth2/v2/auth",
+    tokenEndpoint: "https://oauth2.googleapis.com/token",
+    revocationEndpoint: "https://oauth2.googleapis.com/revoke",
+};
+
 const LoginScreen = ({ navigation }) => {
+    // const [request, response, promptAsync] = AuthSession.useAuthRequest(
+    //     {
+    //         clientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID, // Replace with your Google Client ID
+    //         scopes: ["profile", "email"],
+    //         redirectUri: makeRedirectUri({
+    //             useProxy: true, // This is critical for Expo Go development
+    //         }),
+    //     },
+    //     discovery
+    // );
+
+    // useEffect(() => {
+    //     if (response?.type === "success") {
+    //         console.log(response);
+    //         const { authentication } = response;
+    //         console.log("token", authentication.accessToken);
+    //     }
+    // }, [response]);
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -145,6 +177,7 @@ const LoginScreen = ({ navigation }) => {
                     </View>
                     <View className="pb-5">
                         <TouchableOpacity
+                            // onPress={() => promptAsync()}
                             activeOpacity={0.8}
                             className="bg-[#f3f3f5] border-[#ccc] border flex items-center justify-center py-[14px] rounded-full mt-6"
                         >

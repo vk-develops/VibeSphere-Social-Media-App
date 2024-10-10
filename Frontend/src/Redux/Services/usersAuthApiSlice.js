@@ -60,7 +60,7 @@ export const usersAuthApiSlice = apiSlice.injectEndpoints({
                 url: `${AUTH_URL}/auth/google/callback`,
                 method: "GET",
                 credentials: "include",
-                params: { code }, // Pass the authorization code received from Google
+                params: { code },
             }),
         }),
     }),
