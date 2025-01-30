@@ -1,7 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
-
-import { Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { NavigationContainer } from "@react-navigation/native";
+import { Provider } from "react-redux";
+import store from "./src/Redux/store";
+import MainNavigator from "./src/Navigation/MainNavigator";
 
 export default function App() {
     const [fontsLoaded] = useFonts({
@@ -16,9 +19,13 @@ export default function App() {
     }
 
     return (
-        <View className="flex-1 items-center justify-center bg-bgColor-light">
-            <Text>Open up App.js to start working on your app!</Text>
-            <StatusBar style="auto" />
-        </View>
+        <SafeAreaView className="flex-1">
+            <Provider store={store}>
+                <StatusBar style="auto" />
+                <NavigationContainer>
+                    <MainNavigator />
+                </NavigationContainer>
+            </Provider>
+        </SafeAreaView>
     );
 }
